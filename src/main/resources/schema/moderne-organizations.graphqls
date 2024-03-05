@@ -1,0 +1,100 @@
+type Query {
+    """
+    The list of organizations that a repository belongs to.
+    """
+    organizations(repository: RepositoryInput!): [Organization!]!
+
+    """
+    The list of all possible organizations
+    """
+    allOrganizations: [Organization!]!
+
+    """
+    The list of organizations that a user belongs to. If it is possible to
+    determine the organizations that a user belonged to at a given time, use the `at`
+    parameter. The "default" organization that is selected for a user is the first organization
+    returned.
+    """
+    userOrganizations(user: User!, at: DateTime): [Organization!]!
+
+    """
+    A single organization by id.
+    """
+    organization(id: ID!): Organization
+}
+
+input User {
+    email: String!
+}
+
+type Organization {
+    id: ID!
+    name: String!
+
+    """
+    Ordered list of commit options as they should appear in the UI.
+    """
+    commitOptions: [CommitOption!]!
+
+    parent: Organization
+
+    dashboard: Dashboard
+}
+
+input RepositoryInput {
+    path: String!
+    origin: String
+    branch: String
+}
+
+type Dashboard{
+    """
+    Available/recommended upgrades and migrations.
+    """
+    upgradesAndMigrations: [DashboardRecipe!]
+
+    """
+    Recommended visualizations to run on this organization.
+    """
+    visualizations: [DashboardVisualization!]
+
+    """
+    Security recipes to run for this organization.
+    """
+    security: [DashboardRecipe!]
+}
+
+type DashboardVisualization{
+    visualizationId: String!
+    visualizationOptions: [Option!]!
+}
+
+type DashboardRecipe{
+    recipeId: String!
+    options: [Option!]!
+}
+
+type Option {
+    """
+    Example: `methodPattern`
+    """
+    name: String!
+    """
+    Example: `java.util.List add(..)`
+    """
+    value: Object!
+}
+
+enum CommitOption {
+    Direct
+    Branch
+    Fork
+    PullRequest
+    ForkAndPullRequest
+}
+
+scalar DateTime
+"""
+Objects are generic types that serialize to JSON as `string`, `number`, or `boolean`.
+"""
+scalar Object
