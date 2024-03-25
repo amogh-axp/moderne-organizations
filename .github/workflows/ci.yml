@@ -12,8 +12,8 @@ on:
       - main
   workflow_dispatch: {}
   # weekly run to ensure project still builds
-  schedule:
-    - cron: "0 0 * * 1"
+  # schedule:
+    # - cron: "0 0 * * 1"
 
 concurrency:
   group: ci-${{ github.ref }}
