@@ -86,28 +86,6 @@ public record OrganizationMetricController(PrometheusMeterRegistry meterRegistry
 
 </SwmSnippet>
 
-<SwmSnippet path="/src/main/java/io/moderne/organizations/OrganizationDataFetcher.java" line="24">
-
----
-
-### <SwmToken path="/src/main/java/io/moderne/organizations/OrganizationDataFetcher.java" pos="20:4:4" line-data="public class OrganizationDataFetcher {">`OrganizationDataFetcher`</SwmToken>
-
-This code snippet reads the contents of a JSON file called `ownership.json` and maps it to an object using an `ObjectMapper` instance.
-
-```java
-    public OrganizationDataFetcher(ObjectMapper mapper) throws IOException {
-        this.ownership = mapper.readValue(
-                getClass().getResourceAsStream("/ownership.json"),
-                new TypeReference<>() {
-                }
-        );
-    }
-```
-
----
-
-</SwmSnippet>
-
 <SwmSnippet path="src/main/java/io/moderne/organizations/OrganizationDataFetcher.java" line="32">
 
 ---
