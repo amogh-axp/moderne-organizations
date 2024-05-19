@@ -1,5 +1,5 @@
 ---
-title: First Doc - Organizations
+title: First Doc
 ---
 <SwmSnippet path="/src/main/java/io/moderne/organizations/OrganizationRepositories.java" line="14">
 
@@ -162,54 +162,6 @@ This code snippet returns a `Flux` of `Organization` objects for a given `User` 
                         Flux.just(ALL_ORG)
                                 .filter(__ -> true) // give "ALL" organization to all users
                 );
-    }
-```
-
----
-
-</SwmSnippet>
-
-<SwmSnippet path="/src/main/java/io/moderne/organizations/OrganizationDataFetcher.java" line="67">
-
----
-
-This code snippet maps an `OrganizationRepositories` object to an `Organization` object by setting the corresponding properties of the `Organization` object. It sets the `id` and `name` properties to the `name` property of the `org` parameter. It sets the `dashboard` property to the `dashboard` property of `org`. It checks if the `commitOptions` property of `org` is null and if so, sets it to a list of all `CommitOption` values; otherwise, it sets it to the `commitOptions` property of `org`. It checks if the `parent` property of `org` is not null and if so, it calls the `getOrganizationByName` function to get the parent organization and sets it as the `_parent` property of the `Organization` object. Finally, it builds and returns the `Organization` object.
-
-```java
-    private Organization mapOrganization(OrganizationRepositories org) {
-        return Organization.newBuilder()
-                .id(org.name())
-                .name(org.name())
-                .dashboard(org.dashboard())
-                .commitOptions(org.commitOptions() == null ?
-                        List.of(CommitOption.values()) :
-                        org.commitOptions())
-                ._parent(org.parent() != null ? getOrganizationByName(org.parent()) : null)
-                .build();
-    }
-```
-
----
-
-</SwmSnippet>
-
-<SwmSnippet path="/src/main/java/io/moderne/organizations/OrganizationDataFetcher.java" line="79">
-
----
-
-This code snippet is a private method named `getOrganizationByName` that takes in a `String` parameter `name`. It returns an `Organization` object based on the given `name`. If the `name` is equal to "ALL", it returns a predefined `Organization` object named `ALL_ORG`. Otherwise, it uses Java 8 stream to filter through a list of `ownership` objects, finding the first `org` object whose name is equal to the given `name`. It then maps the `org` object to an `Organization` object using the `mapOrganization` method, and returns it. If no matching `org` object is found, it returns `null`.
-
-```java
-    private Organization getOrganizationByName(String name) {
-        if (name.equals("ALL")) {
-            return ALL_ORG;
-        }
-
-        return ownership.stream()
-                .filter(org -> org.name().equals(name))
-                .findFirst()
-                .map(this::mapOrganization)
-                .orElse(null);
     }
 ```
 
