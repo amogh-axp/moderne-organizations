@@ -6,8 +6,8 @@ app_version: 1.27.0
 ---
 
 <!-- Steps - Do not remove this comment -->
-1. [First Doc - Organizations](first-doc-organizations.q8k7yju4.sw.md)
-2. [Second Doc](second-doc.osvxndtl.sw.md)
+1. [Second Doc](second-doc.osvxndtl.sw.md)
+2. [First Doc](first-doc.q8k7yju4.sw.md)
 
 
 <br/>
